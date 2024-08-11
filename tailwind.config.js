@@ -5,6 +5,11 @@ export default {
         "./resources/**/*.js",
         "./resources/**/*.vue",
     ],
+    purge: [
+        "./resources/**/*.blade.php",
+        "./resources/**/*.js",
+        "./resources/**/*.vue",
+    ],
     theme: {
         extend: {},
     },

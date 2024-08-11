@@ -3,7 +3,7 @@
     "framework": null,
     "functions": {
         "api/index.php": { "runtime": "vercel-php@0.7.1" }
-        
+
     },
     "routes": [
         {
@@ -15,7 +15,7 @@
         "APP_ENV": "production",
         "APP_DEBUG": "true",
         "APP_URL": "https://yourproductionurl.com",
-
+        "APP_KEY" : "base64:x3mSbjSqSaoPyyHzjXA7dqCsHvb9FjLbIjb3Vmni0v8=",
         "APP_CONFIG_CACHE": "/tmp/config.php",
         "APP_EVENTS_CACHE": "/tmp/events.php",
         "APP_PACKAGES_CACHE": "/tmp/packages.php",

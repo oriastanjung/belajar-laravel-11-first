@@ -1,4 +1,4 @@
-<aside class="hidden md:block kw-full bg-zinc-800 text-white h-full px-6 py-10">
+<aside class="hidden md:block w-full bg-zinc-800 text-white h-full px-6 py-10">
     <h1 class="text-2xl font-bold">Dashboard</h1>
     <ul class="mt-20">
         <li>

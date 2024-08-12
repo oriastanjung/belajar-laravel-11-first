@@ -25,7 +25,7 @@
 
 <body class="bg-[#F6F8FE] flex w-full flex-row gap-5 min-h-screen">
     {{-- <x-nav-bar></x-nav-bar> --}}
-    <aside class="hidden md:w-1/4">
+    <aside class="hidden md:flex md:w-1/4">
         <x-sidebar></x-sidebar>
     </aside>
     <main class="w-full md:w-3/4">

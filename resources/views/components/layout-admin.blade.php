@@ -16,17 +16,22 @@
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
     <style>
-        *{
-            font-family: 'Inter',sans-serif
+        * {
+            font-family: 'Inter', sans-serif
         }
     </style>
 </head>
 
 
-<body class="bg-[#F6F8FE]">
-    <x-nav-bar></x-nav-bar>
-    {{ $slot }}
-   
+<body class="bg-[#F6F8FE] flex w-full flex-row gap-5 min-h-screen">
+    {{-- <x-nav-bar></x-nav-bar> --}}
+    <aside class="hidden md:w-1/4">
+        <x-sidebar></x-sidebar>
+    </aside>
+    <main class="w-full md:w-3/4">
+        {{ $slot }}
+    </main>
+
 
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </body>

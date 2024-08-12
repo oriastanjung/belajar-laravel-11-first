@@ -1,6 +1,11 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CatController;
+use App\Http\Controllers\PlaceController;
+use App\Http\Middleware\AdminAuthMiddleware;
+use App\Models\Place;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -40,4 +45,48 @@ Route::get('/cats', function () {
     $data = $catController->getAllCatsData();
 
     return view('cats', ['data' => $data, 'title' => 'Cats Page']);
+});
+
+
+
+// admin routes
+
+Route::get("/admin/login", function () {
+    // Cek apakah admin sudah login
+    if (Auth::guard('admin')->check()) {
+        // Jika sudah login, redirect ke halaman dashboard
+        return redirect()->route('admin.dashboard');
+    }
+    return view('admin.login.index', ['title' => 'Admin Login']);
+});
+
+// Rute untuk memproses login admin
+Route::post('/admin/login', [AuthController::class, 'login'])->name('admin.login');
+Route::post('/admin/logout', [AuthController::class, 'logout'])->name('admin.logout');
+
+// Group untuk rute admin yang memerlukan middleware
+Route::middleware([AdminAuthMiddleware::class])->group(function () {
+    Route::get('/admin/dashboard', function () {
+        return view('admin.index', ['title' => 'Dashboard']);
+    })->name('admin.dashboard');
+
+    Route::get('/admin/places', function () {
+        $data = Place::all();
+        return view('admin.places.index', ['title' => 'Dashboard Places', 'places' => $data]);
+    })->name('admin.places');
+
+    Route::get('/admin/places/create', function(){
+        return view('admin.places.create', ['title' => 'Create - Places']);
+    })->name('places.create');
+
+    Route::get('/admin/places/edit/{id}', function($id){
+        $place = Place::findOrFail($id);
+        return view('admin.places.edit', ['title' => 'Edit - Places', 'place' => $place]);
+    })->name('places.edit');
+    
+    Route::put('/admin/places/{id}', [PlaceController::class, 'updateOne'])->name('places.update');
+
+
+    Route::post('/admin/places/create', [PlaceController::class, 'createOnePlace'])->name('places.create');
+    Route::delete('/admin/places/{id}', [PlaceController::class, 'deleteOne'])->name('places.destroy');
 });

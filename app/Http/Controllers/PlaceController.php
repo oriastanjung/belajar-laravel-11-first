@@ -4,10 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Place;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class PlaceController extends Controller
 {
+
+    // Method untuk menampilkan detail tempat berdasarkan ID
+    public function show($id)
+    {
+        $place = Place::findOrFail($id);
+        return view('places.detail', ['place' => $place]);
+    }
+
     public function createOnePlace(Request $request)
     {
         // Validasi input
@@ -19,15 +26,16 @@ class PlaceController extends Controller
             'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // max 2MB
         ]);
 
-        // Variabel untuk menyimpan path thumbnail
+        // Variabel untuk menyimpan URL thumbnail
         $thumbnailUrl = '';
 
         // Mengunggah thumbnail
         if ($request->hasFile('thumbnail')) {
-            // Unggah thumbnail baru dan ambil nama file
-            $thumbnailUrl = $request->file('thumbnail')->store('public/thumbnails');
-            // Convert path to relative URL for storage
-            $thumbnailUrl = str_replace('public/', '', $thumbnailUrl);
+            // Simpan file ke folder public/thumbnails dengan nama asli file
+            $file = $request->file('thumbnail');
+            $filename = time() . '_' . $file->getClientOriginalName(); // Menghindari duplikasi nama file
+            $file->move(public_path('thumbnails'), $filename);
+            $thumbnailUrl = 'thumbnails/' . $filename;
         }
 
         // Membuat data tempat
@@ -36,7 +44,7 @@ class PlaceController extends Controller
             'location' => $request->input('location'),
             'price' => $request->input('price'),
             'stars' => $request->input('stars'),
-            'thumbnail' => $thumbnailUrl,  // Simpan path relatif
+            'thumbnail' => $thumbnailUrl,  // Simpan URL relatif
         ]);
 
         return redirect()->route('admin.places')->with('success', 'Place created successfully.');
@@ -56,20 +64,21 @@ class PlaceController extends Controller
         // Temukan tempat berdasarkan ID
         $place = Place::findOrFail($id);
 
-        // Variabel untuk menyimpan path thumbnail
+        // Variabel untuk menyimpan URL thumbnail
         $thumbnailUrl = $place->thumbnail;
 
         // Jika ada file thumbnail baru
         if ($request->hasFile('thumbnail')) {
             // Hapus thumbnail lama jika ada
-            if ($place->thumbnail && Storage::exists('public/' . $place->thumbnail)) {
-                Storage::delete('public/' . $place->thumbnail);
+            if ($place->thumbnail && file_exists(public_path($place->thumbnail))) {
+                unlink(public_path($place->thumbnail));
             }
 
-            // Unggah thumbnail baru dan ambil nama file
-            $thumbnailUrl = $request->file('thumbnail')->store('public/thumbnails');
-            // Convert path to relative URL for storage
-            $thumbnailUrl = str_replace('public/', '', $thumbnailUrl);
+            // Simpan file baru ke folder public/thumbnails
+            $file = $request->file('thumbnail');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('thumbnails'), $filename);
+            $thumbnailUrl = 'thumbnails/' . $filename;
         }
 
         // Perbarui data tempat
@@ -90,8 +99,8 @@ class PlaceController extends Controller
         $place = Place::findOrFail($id);
 
         // Hapus thumbnail jika ada
-        if ($place->thumbnail && Storage::exists('public/' . $place->thumbnail)) {
-            Storage::delete('public/' . $place->thumbnail);
+        if ($place->thumbnail && file_exists(public_path($place->thumbnail))) {
+            unlink(public_path($place->thumbnail));
         }
 
         // Hapus tempat

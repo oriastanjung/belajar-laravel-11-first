@@ -14,11 +14,14 @@
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
-    <style>
-        *{
-            font-family: 'Inter',sans-serif
-        }
+    <!-- CSS -->
+<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+<style>
+    *{
+        font-family: 'Inter',sans-serif;
+        scroll-behavior: smooth;
+    }
     </style>
 </head>
 
@@ -26,9 +29,10 @@
 <body class="bg-[#F6F8FE]">
     <x-nav-bar></x-nav-bar>
     {{ $slot }}
-   
-
+    
+    
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
 </body>
 
 </html>

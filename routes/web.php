@@ -16,8 +16,17 @@ Route::get('/', function () {
         'https://www.pixel4k.com/wp-content/uploads/2019/03/pink-waves-nature-landscape-4k_1551644676.jpg.webp',
         'https://wallpapercave.com/wp/wp9183309.jpg'
     ];
-    return view('home', ['title' => 'Home Page', 'carousel' => $imagesCarousel]);
+
+
+    $dataPlace = Place::all();
+
+    return view('home', ['title' => 'Home Page', 'carousel' => $imagesCarousel, 'dataPlace' => $dataPlace]);
 });
+
+
+// Route untuk menampilkan detail tempat berdasarkan ID
+Route::get('/places/{id}', [PlaceController::class, 'show'])->name('places.byid');
+
 
 
 Route::get('/about', function () {

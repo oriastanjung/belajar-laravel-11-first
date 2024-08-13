@@ -17,19 +17,13 @@
             <ul
                 class="font-medium flex flex-col p-4 md:p-0 mt-4  md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 ">
                 <li>
-                    <x-navlink href="/" :active="request()->is('/')">Home</x-navlink>
+                    <x-navlink href="/" >Home</x-navlink>
                 </li>
                 <li>
-                    <x-navlink href="/about" :active="request()->is('about')">About</x-navlink>
+                    <x-navlink href="#places">Places</x-navlink>
                 </li>
                 <li>
-                    <x-navlink href="/contact" :active="request()->is('contact')">Contact</x-navlink>
-                </li>
-                <li>
-                    <x-navlink href="/blog" :active="request()->is('blog')">Blog</x-navlink>
-                </li>
-                <li>
-                    <x-navlink href="/cats" :active="request()->is('cats')">Cats</x-navlink>
+                    <x-navlink href="#about">About</x-navlink>
                 </li>
 
             </ul>
@@ -38,21 +32,14 @@
             <ul
                 class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 bg-white">
                 <li>
-                    <x-navlink href="/" :active="request()->is('/')">Home</x-navlink>
+                    <x-navlink href="/" >Home</x-navlink>
                 </li>
                 <li>
-                    <x-navlink href="/about" :active="request()->is('about')">About</x-navlink>
+                    <x-navlink href="#places" >Places</x-navlink>
                 </li>
                 <li>
-                    <x-navlink href="/contact" :active="request()->is('contact')">Contact</x-navlink>
+                    <x-navlink href="#about" >About</x-navlink>
                 </li>
-                <li>
-                    <x-navlink href="/blog" :active="request()->is('blog')">Blog</x-navlink>
-                </li>
-                <li>
-                    <x-navlink href="/cats" :active="request()->is('cats')">Cats</x-navlink>
-                </li>
-
             </ul>
         </div>
     </div>

@@ -35,7 +35,7 @@
                 <input type="file" id="thumbnail" name="thumbnail"
                     class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" accept="image/*" />
                 @if ($place->thumbnail)
-                    <img src="{{ asset('storage/' . $place->thumbnail) }}" alt="{{ $place->name }}"
+                    <img src="{{ asset($place->thumbnail) }}" alt="{{ $place->name }}"
                         class="w-16 h-16 object-cover rounded-lg">
                 @endif
             </div>

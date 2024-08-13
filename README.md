@@ -1,3 +1,14 @@
+# Preview Project
+
+![Thumbnail Project](/thumbnailProject.png)
+
+
+## Features :
+### 1. CRUD Admin Dashboard site
+### 2. Landing Page
+### 3. Dyanamic Routing by Id of Place
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
